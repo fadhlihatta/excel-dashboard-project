@@ -2,63 +2,107 @@
 
 ## 📌 Overview
 
-This project showcases an end-to-end data analytics workflow built entirely in Microsoft Excel, enhanced with VBA automation.
+This project demonstrates a lightweight **end-to-end data pipeline** built using Microsoft Excel and VBA.
 
-The solution transforms raw CSV data into a clean dataset and presents insights through an interactive dashboard.
+It automates the process of importing raw CSV files, performing data cleaning, and transforming the data into an interactive dashboard for sales analysis.
+
+The solution simulates a real-world analytics workflow within an Excel environment.
 
 ---
 
 ## ⚙️ Key Features
 
-* 🔄 **Automated Data Cleaning (VBA)**
+### 🔄 Automated Data Ingestion (VBA)
 
-  * Handles incremental data updates
-  * Removes duplicates
-  * Standardizes text and data types
+* Batch import multiple CSV files from source folder
+* Append new data into raw dataset
+* Automatically archive processed files
+* Prevent duplicate ingestion
 
-* 📊 **Interactive Dashboard**
+### 🧹 Automated Data Cleaning (VBA)
 
-  * KPI metrics (Revenue, Profit, Quantity Sold)
-  * Sales trend analysis (monthly/yearly)
-  * Product & category performance
-  * Sales channel distribution
-  * Payment method insights
-  * Delivery time comparison
+* Incremental processing (only new data)
+* Trim text fields
+* Handle empty and error values
+* Convert data types (date & numeric)
+* Remove duplicate records
 
-* 📁 **Structured Data Pipeline**
+### 📊 Interactive Dashboard
 
-  * Raw data → Cleaned data → Pivot → Dashboard
+* KPI metrics:
+
+  * Total Revenue
+  * Total Profit
+  * Total Quantity Sold
+* Sales trend analysis (monthly & yearly)
+* Top products and categories
+* Sales channel distribution
+* Payment method breakdown
+* Delivery time comparison
 
 ---
 
 ## 🧱 Tech Stack
 
-* Microsoft Excel
+* Microsoft Excel (.xlsm)
 * VBA (Visual Basic for Applications)
 * Pivot Tables
-* Data Visualization (Charts, KPI Cards)
+* Excel Charts & KPI Cards
 
 ---
 
-## 🔄 Data Workflow
+## 🔄 Data Pipeline Architecture
 
-1. Import raw CSV data into `RawData` sheet
-2. Run VBA macro (`CleanData`)
-3. Cleaned data stored in `CleanedData`
-4. Pivot tables update automatically
-5. Dashboard reflects updated insights
+```id="flow1"
+[CSV Files] 
+    ↓
+(VBA ImportData)
+    ↓
+[RawData Sheet]
+    ↓
+(VBA CleanData)
+    ↓
+[CleanedData Table]
+    ↓
+[Pivot Tables]
+    ↓
+[Dashboard]
+```
 
 ---
 
-## 🧠 Data Cleaning Logic
+## 📂 VBA Automation
 
-The VBA script performs:
+### 1. Import Data (`ImportData`)
 
-* Trimming text values
-* Handling empty and error cells
-* Converting data types (date & numeric)
-* Removing duplicate records
-* Incremental data processing (only new rows)
+Handles batch ingestion of CSV files:
+
+* Reads all `.csv` files from source folder
+* Appends data into `RawData`
+* Moves processed files to archive folder
+
+```vb
+Sub ImportData()
+    ' Batch import CSV → RawData → Archive
+End Sub
+```
+
+---
+
+### 2. Data Cleaning (`CleanData`)
+
+Performs transformation and validation:
+
+* Incremental update logic
+* Text standardization (Trim)
+* Data type conversion
+* Duplicate removal
+
+```vb
+Sub CleanData()
+    ' Clean & transform raw data
+End Sub
+```
 
 ---
 
@@ -74,9 +118,20 @@ The VBA script performs:
 excel-sales-dashboard/
 │
 ├── data/
+│   ├── raw_data_sample.csv
+│   └── cleaned_data_sample.csv
+│
 ├── excel/
+│   └── sales_dashboard.xlsm
+│
 ├── vba/
+│   ├── import_data.bas
+│   └── clean_data.bas
+│
 ├── docs/
+│   ├── dashboard_preview.png
+│   └── data_flow_diagram.png
+│
 └── README.md
 ```
 
@@ -84,37 +139,56 @@ excel-sales-dashboard/
 
 ## 🚀 How to Use
 
-1. Open `sales_dashboard.xlsm`
-2. Paste new data into `RawData`
-3. Run macro: `CleanData`
+1. Place CSV files into:
+
+   ```
+   D:\VBA Macro Excel\Source Data\
+   ```
+
+2. Open:
+
+   ```
+   sales_dashboard.xlsm
+   ```
+
+3. Run macro:
+
+   * `ImportData` → load new files
+   * `CleanData` → process data
+
 4. Refresh Pivot Tables
+
 5. View updated dashboard
 
 ---
 
-## 🎯 Business Questions Answered
+## 🧠 Business Questions Answered
 
 * What is the total revenue and profit?
-* Which products and categories perform best?
+* Which products and categories generate the most sales?
 * How do sales trends evolve over time?
-* What are the dominant sales channels?
-* How do payment methods distribute?
-* Which distributor has the fastest delivery time?
+* Which sales channels dominate performance?
+* What are the most used payment methods?
+* Which distributors have the fastest delivery time?
 
 ---
 
-## ⚠️ Notes
+## ⚠️ Limitations
 
-* Data used in this project is synthetic (AI-generated)
-* This project focuses on demonstrating data workflow and analytics capability
+* File path is currently hardcoded (local environment)
+* Data is synthetic (AI-generated)
+* Limited data validation rules
+* Not optimized for large-scale datasets
 
 ---
 
-## 📌 Future Improvements
+## 🚀 Future Improvements
 
-* Integrate SQL or Python for scalable data processing
-* Add forecasting model for sales prediction
-* Migrate dashboard to Power BI for advanced interactivity
+* Parameterize file paths (dynamic folder selection)
+* Add data validation rules (null handling, outliers)
+* Integrate SQL / Python for scalable processing
+* Add advanced metrics (profit margin, growth rate)
+* Migrate dashboard to Power BI
 
 ---
 
