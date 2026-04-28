@@ -108,7 +108,7 @@ End Sub
 
 ## 📊 Dashboard Preview
 
-![Dashboard](docs/dashboard_preview.png)
+![Dashboard](docs/dashboard-preview.png)
 
 ---
 
